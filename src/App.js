@@ -2,9 +2,9 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
+function FoodApp() {
+  return (function () => {
+    <div className="FoodApp">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -21,6 +21,8 @@ function App() {
       </header>
     </div>
   );
+  })
+
 }
 
-export default App;
+export default FoodApp;

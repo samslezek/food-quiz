@@ -1,0 +1,50 @@
+[{
+"food": "apple",
+"value": 0.05,
+"key": "0001"
+},
+{
+"food": "banana",
+"value": 0.2,
+"key": "0002"
+},
+{
+"food": "carrot",
+"value": 0.012,
+"key": "0003"
+},
+{
+"food": "chicken",
+"value": 0.14,
+"key": "0004"
+},
+{
+"food": "steak",
+"value": 0.04,
+"key": "0005"
+},
+{
+"food": "potato",
+"value": 0.03,
+"key": "0006"
+},
+{
+"food": "broccoli",
+"value": 0.011,
+"key": "0007"
+},
+{
+"food": "cheddar cheese",
+"value": 0.022,
+"key": "0008"
+},
+{
+"food": "coffee",
+"value": 0.3,
+"key": "0009"
+},
+{
+"food": "ice cream",
+"value": 0.101,
+"key": "0010"
+}]
