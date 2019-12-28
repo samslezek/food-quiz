@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 // import * as serviceWorker from './serviceWorker';
 import foodData from './foodData/foodData.json';
 import Question from './components/Question';
+import HighScores from './components/HighScores';
 import NameSubmitForm from './components/NameSubmitForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/style.css';
@@ -22,12 +23,14 @@ class FoodApp extends Component {
 		this.state = {
 				foodBank: randomFoodData,
 				correctAnswers: 0,
-				totalAnswers: 0
+				totalAnswers: 0,
+				submittedScore:false
 		}
 		// console.log(this.state.foodBank[0].food)
 		this.createQuiz = this.createQuiz.bind(this);
 		this.render = this.render.bind(this);
 	}
+
 
 	saySomething = (chosenValue,correctValue) => {
 		if (chosenValue == correctValue){
@@ -40,6 +43,7 @@ class FoodApp extends Component {
 					totalAnswers : this.state.totalAnswers+1
 				})
 			}
+			console.log('finished updating parent state to ' + this.state.correctAnswers)
 	}
 
 	createQuiz = () => {
@@ -57,45 +61,32 @@ class FoodApp extends Component {
 	}
 
 	render() {
-		if (this.state.totalAnswers<10 && this.state.totalAnswers-this.state.correctAnswers<=1){
-		return ( 
-			<div className='container'>
-				<h1>Food Trivia</h1>
-				<p><em>Pick the more popular food. If you answer incorrectly more than twice, you lose. </em></p>
-				{this.createQuiz()}
-				<p>Correct Answers: {this.state.correctAnswers}</p>
-				<p>Total Answers: {this.state.totalAnswers}</p>
-				<NameSubmitForm />
-			</div>
-			)
-		}
-		if (this.state.totalAnswers-this.state.correctAnswers>=2){
+		if (this.state.totalAnswers<10){
 			return ( 
-			<React.Fragment>
-				<h1>Food Trivia</h1>
-				<p><em>You're allowed two incorrect answers</em></p>
-				<p>Correct Answers: {this.state.correctAnswers}</p>
-				<p>Total Answers: {this.state.totalAnswers}</p>
-				<p><strong>YOU FAILED</strong></p>
-				<NameSubmitForm />
-			</React.Fragment>
-			)
-		}
-		if (this.state.correctAnswers>7){
-			return ( 
-			<React.Fragment>
-				<h1>Food Trivia</h1>
-				<p><em>You're allowed two incorrect answers</em></p>
-				<p>Correct Answers: {this.state.correctAnswers}</p>
-				<p>Total Answers: {this.state.totalAnswers}</p>
-				<p><strong>YOU PASSED</strong></p>
-				<NameSubmitForm />
-			</React.Fragment>
-			)
-		}
+				<div className='container'>
+					<h1>Food Trivia</h1>
+					<p><em>Pick the more popular food.</em></p>
+					{this.createQuiz()}
+					<HighScores />
+				</div>
+				)
+			} else if (this.state.submittedScore==false){
+				return ( 
+				<React.Fragment>
+					<h3>Food Trivia Results</h3>
+					<p>Correct Answers: {this.state.correctAnswers}</p>
+					<p>Total Answers: {this.state.totalAnswers}</p>
+					<br />
+					<NameSubmitForm currentScore={this.state.correctAnswers} submitscore={() => this.setState({submittedScore:true})} />
+					<HighScores />
+				</React.Fragment>
+				)
+			} else {
+				return <HighScores />
+			}
+		
 	}
 }
-
 
 ReactDOM.render(<FoodApp />, document.getElementById('root'));
 

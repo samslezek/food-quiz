@@ -41,14 +41,14 @@ class Question extends Component {
 			<React.Fragment>
 				<h3>Question {questionNum}</h3>
 				<div className='options'>
-					<button className = 'btn btn-primary' onClick={() => {
-						this.deleteQuestion(this.state.choiceA.value,this.state.correctChoice);
-						this.props.selected(this.state.choiceA.value,this.state.correctChoice);}}>
-						{this.state.choiceA.food}</button>
-					<button className = 'btn btn-primary' onClick={() => {
-						this.deleteQuestion(this.state.choiceB.value,this.state.correctChoice);
-						this.props.selected(this.state.choiceB.value,this.state.correctChoice)}}>
-							{this.state.choiceB.food}</button>
+						<button className = 'btn btn-primary' onClick={() => {
+							this.deleteQuestion(this.state.choiceA.value,this.state.correctChoice);
+							this.props.selected(this.state.choiceA.value,this.state.correctChoice);}}>
+							{this.state.choiceA.food}</button>
+						<button className = 'btn btn-primary' onClick={() => {
+							this.deleteQuestion(this.state.choiceB.value,this.state.correctChoice);
+							this.props.selected(this.state.choiceB.value,this.state.correctChoice)}}>
+								{this.state.choiceB.food}</button>
 				</div>
 			</React.Fragment>
 			)
@@ -56,13 +56,29 @@ class Question extends Component {
 			if (this.state.choiceB.value == this.state.correctChoice) { return ( 
 				<React.Fragment>
 					<h3>Question {questionNum}</h3>
-					<p><strong>Incorrect! Only {(this.state.incorrectChoice*100).toFixed(3)}% of orders contain {this.state.choiceA.food}, and {(this.state.correctChoice*100).toFixed(3)}% of orders contain {this.state.choiceB.food}.</strong></p>
+					<div className='options'>
+							<button className = 'btn btn-danger' disabled>
+								{this.state.choiceA.food}</button>
+							<button className = 'btn btn-secondary' disabled>
+									{this.state.choiceB.food}</button>
+							<br />
+							<div className='below-button'>{(this.state.choiceA.value*100).toFixed(3)}%</div>
+							<div className='below-button'><strong>{(this.state.choiceB.value*100).toFixed(3)}%</strong></div>
+					</div>
 				</React.Fragment>
 				)
 			} else { return ( 
 				<React.Fragment>
 					<h3>Question {questionNum}</h3>
-					<p><strong>Incorrect! Only {(this.state.incorrectChoice*100).toFixed(3)}% of orders contain {this.state.choiceB.food}, and {(this.state.correctChoice*100).toFixed(3)}% of orders contain {this.state.choiceA.food}.</strong></p>
+					<div className='options'>
+							<button className = 'btn btn-secondary' disabled>
+								{this.state.choiceA.food}</button>
+							<button className = 'btn btn-danger' disabled>
+									{this.state.choiceB.food}</button>
+							<br />
+							<div className='below-button'><strong>{(this.state.choiceA.value*100).toFixed(3)}%</strong></div>
+							<div className='below-button'>{(this.state.choiceB.value*100).toFixed(3)}%</div>
+					</div>
 				</React.Fragment>
 				)
 
@@ -71,13 +87,29 @@ class Question extends Component {
 	if (this.state.choiceB.value == this.state.correctChoice) { return ( 
 				<React.Fragment>
 					<h3>Question {questionNum}</h3>
-					<p><strong>Correct! {(this.state.correctChoice*100).toFixed(3)}% of orders contain {this.state.choiceB.food}, and only {(this.state.incorrectChoice*100).toFixed(3)}% of orders contain {this.state.choiceA.food}.</strong></p>
+					<div className='options'>
+							<button className = 'btn btn-secondary' disabled>
+								{this.state.choiceA.food}</button>
+							<button className = 'btn btn-success' disabled>
+									{this.state.choiceB.food}</button>
+							<br />
+							<div className='below-button'>{(this.state.choiceA.value*100).toFixed(3)}%</div>
+							<div className='below-button'><strong>{(this.state.choiceB.value*100).toFixed(3)}%</strong></div>
+					</div>
 				</React.Fragment>
 				)
 			} else { return ( 
 				<React.Fragment>
 					<h3>Question {questionNum}</h3>
-					<p><strong>Correct! {(this.state.correctChoice*100).toFixed(3)}% of orders contain {this.state.choiceA.food}, and only {(this.state.incorrectChoice*100).toFixed(3)}% of orders contain {this.state.choiceB.food}.</strong></p>
+					<div className='options'>
+							<button className = 'btn btn-success' disabled>
+								{this.state.choiceA.food}</button>
+							<button className = 'btn btn-secondary' disabled>
+									{this.state.choiceB.food}</button>
+							<br />
+							<div className='below-button'><strong>{(this.state.choiceA.value*100).toFixed(3)}%</strong></div>
+							<div className='below-button'>{(this.state.choiceB.value*100).toFixed(3)}%</div>
+					</div>
 				</React.Fragment>
 				)
 	}

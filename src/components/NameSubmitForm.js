@@ -7,26 +7,27 @@ import ReactDOM from 'react-dom';
 
 class NameSubmitForm extends Component {
   state = {
-    score : 7,
-    inputValue : 'testing'
+    score : this.props.currentScore,
+    inputValue : ''
   }
 
-  render() {
+  componentWillReceiveProps(nextProps) {
+    this.setState({score:this.props.currentScore})
+  }
+
+  render = (props) => {
     return (
       //...
       <React.Fragment>
         <form onSubmit={this.updateInputValue}>
           <div className="form-group">
-            <label><strong>Submit Name For High Score</strong></label>
             <input type="text" className="form-control" id="input1"  placeholder="Enter Name For High Score..." />
             <button type='submit'>Submit</button>
           </div>
         </form>
-        <p>{this.state.inputValue}</p>
       </React.Fragment>
     );
-
-  }
+}
 
 
   updateInputValue = (evt) => {
@@ -34,8 +35,20 @@ class NameSubmitForm extends Component {
     this.setState({
       inputValue: evt.target[0].value
     });
-  // }
+
+    fetch('/react', {
+      method: 'post',
+      headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+        body: JSON.stringify({
+          name: evt.target[0].value,
+          score: this.state.score
+        })
+    })
+    this.props.submitscore();
+  }
 };
-}
 
 export default NameSubmitForm;
