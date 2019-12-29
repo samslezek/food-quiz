@@ -22,7 +22,8 @@ class NameSubmitForm extends Component {
         <form onSubmit={this.updateInputValue}>
           <div className="form-group">
             <input type="text" className="form-control" id="input1"  placeholder="Enter Name For High Score..." />
-            <button type='submit'>Submit</button>
+            <button type='submit' class='btn btn-primary btn-sm'>Submit</button>
+            <button className='btn btn-sm btn-primary btn-sm' onClick={() => {this.props.resetfunc()}}>Play Again</button>
           </div>
         </form>
       </React.Fragment>

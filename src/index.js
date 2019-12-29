@@ -60,30 +60,46 @@ class FoodApp extends Component {
 		return children
 	}
 
+	resetGame = () => {
+		let randomFoodData = foodData
+		for (let i = randomFoodData.length - 1; i > 0; i--) {
+		        const j = Math.floor(Math.random() * (i + 1));
+		        [randomFoodData[i], randomFoodData[j]] = [randomFoodData[j], randomFoodData[i]];
+		}
+		
+		this.setState({
+				foodBank: randomFoodData,
+				correctAnswers: 0,
+				totalAnswers: 0,
+				submittedScore:false
+		});
+	}
+
 	render() {
 		if (this.state.totalAnswers<10){
 			return ( 
 				<div className='container'>
 					<h1>Food Trivia</h1>
-					<p><em>Pick the more popular food.</em></p>
+					<p><em>The below questions select foods from the Instacart database. Try to select the more popular food in each question, as defined by % of Instacart orders containing that food.</em></p>
 					{this.createQuiz()}
-					<HighScores />
 				</div>
 				)
 			} else if (this.state.submittedScore==false){
 				return ( 
-				<React.Fragment>
+				<div className='container'>
 					<h3>Food Trivia Results</h3>
-					<p>Correct Answers: {this.state.correctAnswers}</p>
-					<p>Total Answers: {this.state.totalAnswers}</p>
+					<p>You got <strong>{this.state.correctAnswers}/{this.state.totalAnswers} questions correct.</strong></p>
 					<br />
-					<NameSubmitForm currentScore={this.state.correctAnswers} submitscore={() => this.setState({submittedScore:true})} />
+					<NameSubmitForm currentScore={this.state.correctAnswers} submitscore={() => this.setState({submittedScore:true})} resetfunc={() => {this.resetGame()}} />
 					<HighScores />
-				</React.Fragment>
+				</div>
 				)
-			} else {
-				return <HighScores />
 			}
+			return (
+			<React.Fragment>
+				<HighScores key={this.state.submittedScore} />
+				<button className='btn btn-primary' onClick={() => {this.resetGame()}}>Play Again</button>
+			</React.Fragment>);
 		
 	}
 }
